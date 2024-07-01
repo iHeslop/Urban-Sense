@@ -9,4 +9,4 @@ class TrafficAnalysisResult(db.Model):
     avg_current_speed = db.Column(db.Float, nullable=False)
     avg_free_flow_speed = db.Column(db.Float, nullable=False)
     speed_ratio = db.Column(db.Float, nullable=False)
-    timestamp = db.Column(db.DateTime, default=datetime.now)
+    timestamp = db.Column(db.DateTime, default=datetime.today)

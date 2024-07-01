@@ -1,7 +1,7 @@
 import os
-
+from datetime import date
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import avg, col
+from pyspark.sql.functions import avg, col, to_date, current_date
 from urbansense.models.traffic_analysis_model import TrafficAnalysisResult
 from urbansense.db_config import db
 from dotenv import load_dotenv
@@ -36,7 +36,9 @@ def run_spark_job():
             .option("driver", "com.mysql.cj.jdbc.Driver") \
             .load()
 
-        avg_speed_per_city = df.groupBy("city") \
+        df_filtered = df.filter(to_date(col("timestamp")) == current_date())
+
+        avg_speed_per_city = df_filtered.groupBy("city") \
             .agg(
                 avg("current_speed").alias("avg_current_speed"),
                 avg("free_flow_speed").alias("avg_free_flow_speed")
@@ -55,7 +57,8 @@ def run_spark_job():
                 city=row['city'],
                 avg_current_speed=row['avg_current_speed'],
                 avg_free_flow_speed=row['avg_free_flow_speed'],
-                speed_ratio=row['speed_ratio']
+                speed_ratio=row['speed_ratio'],
+                timestamp=date.today()
             )
             db.session.add(analysis_entry)
             db.session.commit()
