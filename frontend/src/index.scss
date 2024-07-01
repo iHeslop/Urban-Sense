@@ -347,3 +347,16 @@ template {
 [hidden] {
   display: none;
 }
+
+
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./assets/fonts/Montserrat-VariableFont_wght.ttf");
+  font-display: swap;
+}
+
+* {
+  font-family: "Montserrat";
+  letter-spacing: 0.05em;
+}
