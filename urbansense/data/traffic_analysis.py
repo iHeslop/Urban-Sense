@@ -18,7 +18,10 @@ def run_spark_job():
 
         spark = SparkSession.builder \
             .appName("Traffic Analysis") \
-            .config("spark.jars", "/path/to/mysql-connector-java.jar") \
+            .config("spark.driver.host", "localhost") \
+            .config("spark.jars", "urbansense\jars\mysql-connector-j-8.4.0.jar") \
+            .config("spark.local.dir", r'urbansense\tmp') \
+            .master("local[*]") \
             .getOrCreate()
 
         jdbc_url = f"jdbc:mysql://{DB_HOST}:{DB_PORT}/{DB_NAME}"
