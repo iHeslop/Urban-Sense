@@ -16,3 +16,19 @@ export const getAllResults = async (): Promise<TrafficResultsResponse[]> => {
     } 
     return await response.json();
 }
+
+export const getLatestResults = async (): Promise<TrafficResultsResponse[]> => {
+    const response = await fetch(baseUrl + "/latest-results");
+    if(!response.ok) {
+        throw new Error("Failed to fetch latest city traffic results")
+    } 
+    return await response.json();
+}
+
+export const getResultsByCity = async (city: string): Promise<TrafficResultsResponse[]> => {
+    const response = await fetch(`${baseUrl}/results/${city}`);
+    if(!response.ok) {
+        throw new Error("Failed to fetch latest city entry")
+    } 
+    return await response.json();
+}

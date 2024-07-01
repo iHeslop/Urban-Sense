@@ -1,7 +1,7 @@
 import os
-from datetime import date
+from datetime import datetime
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import avg, col, to_date, current_date
+from pyspark.sql.functions import avg, col, hour, current_date
 from urbansense.models.traffic_analysis_model import TrafficAnalysisResult
 from urbansense.db_config import db
 from dotenv import load_dotenv
@@ -19,8 +19,8 @@ def run_spark_job():
         spark = SparkSession.builder \
             .appName("Traffic Analysis") \
             .config("spark.driver.host", "localhost") \
-            .config("spark.jars", "urbansense\jars\mysql-connector-j-8.4.0.jar") \
-            .config("spark.local.dir", r'urbansense\tmp') \
+            .config("spark.jars", "urbansense/jars/mysql-connector-j-8.4.0.jar") \
+            .config("spark.local.dir", r'urbansense/tmp') \
             .master("local[*]") \
             .getOrCreate()
 
@@ -36,9 +36,11 @@ def run_spark_job():
             .option("driver", "com.mysql.cj.jdbc.Driver") \
             .load()
 
-        df_filtered = df.filter(to_date(col("timestamp")) == current_date())
+        # Filter data for the current date and round timestamp to the nearest hour
+        df_filtered = df.filter(df.timestamp >= current_date())
+        df_filtered = df_filtered.withColumn('hour', hour(col('timestamp')))
 
-        avg_speed_per_city = df_filtered.groupBy("city") \
+        avg_speed_per_city = df_filtered.groupBy("city", "hour") \
             .agg(
                 avg("current_speed").alias("avg_current_speed"),
                 avg("free_flow_speed").alias("avg_free_flow_speed")
@@ -46,19 +48,20 @@ def run_spark_job():
 
         avg_speed_per_city = avg_speed_per_city.withColumn(
             "speed_ratio", col("avg_current_speed") /
-
             col("avg_free_flow_speed")
         )
 
         rows = avg_speed_per_city.collect()
 
         for row in rows:
+            timestamp = datetime.now().replace(
+                hour=row['hour'], minute=0, second=0, microsecond=0)
             analysis_entry = TrafficAnalysisResult(
                 city=row['city'],
                 avg_current_speed=row['avg_current_speed'],
                 avg_free_flow_speed=row['avg_free_flow_speed'],
                 speed_ratio=row['speed_ratio'],
-                timestamp=date.today()
+                timestamp=timestamp
             )
             db.session.add(analysis_entry)
             db.session.commit()
