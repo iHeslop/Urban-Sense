@@ -3,8 +3,7 @@ from flask import Blueprint, jsonify
 from urbansense.services.traffic_data import populate_traffic_data
 from urbansense.data.traffic_analysis import run_spark_job
 from urbansense.db_config import db
-from urbansense.models.traffic_analysis_model import TrafficAnalysisResult
-from urbansense.models.traffic_data_model import CityTrafficData
+from urbansense.models.traffic_data_model import CityTrafficData, TrafficAnalysisResult
 
 routes_bp = Blueprint('routes', __name__)
 

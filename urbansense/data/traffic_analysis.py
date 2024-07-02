@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import avg, col, hour, current_date
-from urbansense.models.traffic_analysis_model import TrafficAnalysisResult
+from urbansense.models.traffic_data_model import TrafficAnalysisResult
 from urbansense.db_config import db
 from dotenv import load_dotenv
 
