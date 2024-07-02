@@ -41,11 +41,17 @@ def get_result_by_city(city):
         results = TrafficAnalysisResult.query.with_entities(
             TrafficAnalysisResult.city,
             TrafficAnalysisResult.speed_ratio,
-            TrafficAnalysisResult.timestamp
+            TrafficAnalysisResult.timestamp,
+            TrafficAnalysisResult.avg_current_speed,
+            TrafficAnalysisResult.avg_free_flow_speed
         ).filter(TrafficAnalysisResult.city == city).all()
-        speed_ratios = [
-            {"city": result.city, "speed_ratio": result.speed_ratio, "timestamp": result.timestamp} for result in results]
-        return jsonify(speed_ratios), 200
+        result_data = [
+            {"city": result.city,
+                "avg_current_speed": result.avg_current_speed,
+                "avg_free_flow_speed": result.avg_free_flow_speed,
+                "speed_ratio": result.speed_ratio,
+                "timestamp": result.timestamp} for result in results]
+        return jsonify(result_data), 200
     except Exception as e:
         return jsonify({"message": str(e)}), 500
 
