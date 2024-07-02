@@ -67,6 +67,20 @@ const HomePage = () => {
               informed decisions to ensure your health and safety.
             </p>
           </div>
+          <div className={styles.section}>
+            <Link to="/energy" className={styles.link}>
+              <p className={styles.section_title}>
+                <span className={styles.bold}>Energy </span>Consumption
+              </p>
+            </Link>
+            <p className={styles.info}>
+              Understand your city's energy consumption patterns with Urban
+              Sense's comprehensive energy data. We provide insights into energy
+              usage trends, helping you make informed decisions about energy
+              efficiency and conservation. Use this data to optimize your energy
+              consumption and contribute to a sustainable future.
+            </p>
+          </div>
         </div>
       </div>
       <p className={styles.copyright}>&copy; iHeslop / 2024</p>
