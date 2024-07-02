@@ -11,6 +11,7 @@ import {
 import { getResultsByCity } from "../../services/traffic-data";
 import { TrafficResultsResponse } from "../../services/api-responses.interface";
 import Loader from "../Loader/Loader";
+import styles from "./CityGraphLoader.module.scss";
 
 interface CityGraphLoaderProps {
   city: string;
@@ -45,7 +46,7 @@ const CityGraphLoader = ({ city }: CityGraphLoaderProps) => {
         <Loader fetchStatus={fetchStatus} />
       )}
       {fetchStatus === "SUCCESS" && data.length > 0 && (
-        <div>
+        <div className={styles.container}>
           <LineChart width={1000} height={600} data={data}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="timestamp" />
@@ -58,7 +59,7 @@ const CityGraphLoader = ({ city }: CityGraphLoaderProps) => {
             <Line
               type="monotone"
               dataKey="avg_free_flow_speed"
-              stroke="#8884d8"
+              stroke="rebeccapurple"
               name="Average Free Flow Speed"
               dot={{ strokeWidth: 2 }}
               strokeWidth={2}
@@ -66,13 +67,13 @@ const CityGraphLoader = ({ city }: CityGraphLoaderProps) => {
             <Line
               type="monotone"
               dataKey="avg_current_speed"
-              stroke="#82ca9d"
+              stroke="green"
               name="Average Current Speed"
               dot={{ strokeWidth: 2 }}
               strokeWidth={2}
             />
           </LineChart>
-          <p>{city}</p>
+          <p className={styles.title}>{city}</p>
         </div>
       )}
     </>

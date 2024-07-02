@@ -8,7 +8,8 @@
 .box {
   display: flex;
   flex-direction: column;
-  padding: 4%;
+  width: 30%;
+  padding-left: 4%;
   gap: 2em;
 }
 
@@ -25,4 +26,32 @@
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+.title {
+  font-size: 24px;
+  letter-spacing: 0.1em;
+}
+
+.bold {
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+.select {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.info {
+  font-size: 13px;
+  color: gray;
+}
+
+.text {
+  line-height: 1.5em;
 }

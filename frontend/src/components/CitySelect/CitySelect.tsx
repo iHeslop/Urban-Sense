@@ -1,3 +1,5 @@
+import styles from "./CitySelect.module.scss";
+
 interface CitySelectProps {
   city: string;
   handleCityChange: (city: string) => void;
@@ -6,7 +8,11 @@ interface CitySelectProps {
 const CitySelect = ({ handleCityChange, city }: CitySelectProps) => {
   return (
     <>
-      <select value={city} onChange={(e) => handleCityChange(e.target.value)}>
+      <select
+        value={city}
+        onChange={(e) => handleCityChange(e.target.value)}
+        className={styles.select}
+      >
         <option value="Sydney">Sydney</option>
         <option value="Melbourne">Melbourne</option>
         <option value="Adelaide">Adelaide</option>

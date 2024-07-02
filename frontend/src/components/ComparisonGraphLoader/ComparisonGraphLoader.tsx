@@ -11,6 +11,7 @@ import {
 import { getLatestResults } from "../../services/traffic-data";
 import { TrafficResultsResponse } from "../../services/api-responses.interface";
 import Loader from "../Loader/Loader";
+import styles from "./ComparisonGraphLoader.module.scss";
 
 interface ComparisonGraphLoaderProps {
   comparison: string;
@@ -47,8 +48,8 @@ const ComparisonGraphLoader = ({ comparison }: ComparisonGraphLoaderProps) => {
       {fetchStatus === "LOADING" && <Loader fetchStatus={fetchStatus} />}
       {fetchStatus === "FAILED" && <Loader fetchStatus={fetchStatus} />}
       {fetchStatus === "SUCCESS" && (
-        <div>
-          <BarChart width={1000} height={600} data={data}>
+        <div className={styles.container}>
+          <BarChart width={1200} height={600} data={data}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="city" />
             <Tooltip />
@@ -61,13 +62,15 @@ const ComparisonGraphLoader = ({ comparison }: ComparisonGraphLoaderProps) => {
                 />
                 <Bar
                   dataKey="avg_current_speed"
-                  fill="#82ca9d"
+                  fill="green"
                   name="Average Current Speed"
+                  barSize={50}
                 />
                 <Bar
                   dataKey="avg_free_flow_speed"
-                  fill="#8884d8"
+                  fill="rebeccapurple"
                   name="Average Free Flow Speed"
+                  barSize={50}
                 />
               </>
             )}
@@ -78,13 +81,14 @@ const ComparisonGraphLoader = ({ comparison }: ComparisonGraphLoaderProps) => {
                 />
                 <Bar
                   dataKey="speed_ratio"
-                  fill="#82ca9d"
+                  fill="green"
                   name="Current Traffic Flow Level"
+                  barSize={100}
                 />
               </>
             )}
           </BarChart>
-          <p>{latestTimestamp}</p>
+          <p className={styles.title}>{latestTimestamp}</p>
         </div>
       )}
     </>

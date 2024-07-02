@@ -11,10 +11,10 @@ API_KEY = os.getenv('API_KEY')
 CITIES = {
     'Sydney': '-33.8688,151.2093',
     'Melbourne': '-37.8136,144.9631',
-    'Brisbane': '-27.4698,153.0251',
+    'Brisbane': '-27.4705,153.0260',
     'Adelaide': '-34.9285,138.6007',
-    'Perth': '-31.9505,115.8605',
-    'Canberra': '-35.2809,149.1300'
+    'Perth': '-31.9514,115.8617',
+    'Canberra': '-35.2802,149.1310'
 }
 
 API_URL = "https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json"
