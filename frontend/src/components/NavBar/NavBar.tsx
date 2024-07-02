@@ -36,6 +36,14 @@ const NavBar = () => {
         >
           WATER QUALITY
         </NavLink>
+        <NavLink
+          to="/energy"
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.active}` : styles.link
+          }
+        >
+          ENERGY CONSUMPTION
+        </NavLink>
       </div>
     </div>
   );
