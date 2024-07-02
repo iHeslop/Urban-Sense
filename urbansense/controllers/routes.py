@@ -1,3 +1,4 @@
+import pytz
 from flask import Blueprint, jsonify
 from urbansense.services.traffic_data import populate_traffic_data
 from urbansense.data.traffic_analysis import run_spark_job
@@ -45,13 +46,25 @@ def get_result_by_city(city):
             TrafficAnalysisResult.avg_current_speed,
             TrafficAnalysisResult.avg_free_flow_speed
         ).filter(TrafficAnalysisResult.city == city).all()
-        result_data = [
-            {"city": result.city,
+
+        result_data = []
+        for result in results:
+            utc_timestamp = result.timestamp
+            timezone_aest = pytz.timezone('Australia/Sydney')
+            aest_timestamp = utc_timestamp.astimezone(timezone_aest)
+            formatted_timestamp = aest_timestamp.strftime('%d/%m %H:%M')
+
+            result_item = {
+                "city": result.city,
                 "avg_current_speed": result.avg_current_speed,
                 "avg_free_flow_speed": result.avg_free_flow_speed,
                 "speed_ratio": result.speed_ratio,
-                "timestamp": result.timestamp} for result in results]
+                "timestamp": formatted_timestamp
+            }
+            result_data.append(result_item)
+
         return jsonify(result_data), 200
+
     except Exception as e:
         return jsonify({"message": str(e)}), 500
 
