@@ -41,7 +41,7 @@ const HomePage = () => {
           <div className={styles.section}>
             <Link to="/pollution" className={styles.link}>
               <p className={styles.section_title}>
-                <span className={styles.bold}>Air </span>Pollution
+                <span className={styles.bold}>Air </span>Quality
               </p>
             </Link>
             <p className={styles.info}>
@@ -56,15 +56,15 @@ const HomePage = () => {
           <div className={styles.section}>
             <Link to="/water" className={styles.link}>
               <p className={styles.section_title}>
-                <span className={styles.bold}>Water </span>Quality
+                <span className={styles.bold}>Water </span>Usage
               </p>
             </Link>
             <p className={styles.info}>
-              Ensure the safety and quality of your water supply with our water
-              data analysis. Urban Sense tracks water quality metrics, including
-              contamination levels and overall safety. Stay informed about the
-              water you use for drinking, cooking, and bathing, and make
-              informed decisions to ensure your health and safety.
+              Monitor and manage your water consumption effectively with Urban
+              Sense's detailed analysis. Stay informed about water quality
+              metrics, including contamination levels and safety, to make
+              informed decisions for drinking, cooking, and bathing, ensuring
+              the well-being of yourself and your family.
             </p>
           </div>
           <div className={styles.section}>

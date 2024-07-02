@@ -26,7 +26,7 @@ const NavBar = () => {
             isActive ? `${styles.link} ${styles.active}` : styles.link
           }
         >
-          AIR POLLUTION
+          AIR QUALITY
         </NavLink>
         <NavLink
           to="/water"
@@ -34,7 +34,7 @@ const NavBar = () => {
             isActive ? `${styles.link} ${styles.active}` : styles.link
           }
         >
-          WATER QUALITY
+          WATER USAGE
         </NavLink>
         <NavLink
           to="/energy"

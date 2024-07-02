@@ -18,7 +18,6 @@
 
 .list {
   display: flex;
-  align-items: center;
   width: 60%;
   gap: 4em;
 }
@@ -58,6 +57,7 @@
   animation: fadeIn 1s forwards;
   animation-delay: 4s;
   opacity: 0;
+  width: 25%;
   &_title {
     transition: 0.3s ease-in-out;
     &:hover {
