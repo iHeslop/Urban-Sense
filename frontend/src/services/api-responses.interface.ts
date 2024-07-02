@@ -9,7 +9,6 @@ export interface TrafficDataResponse {
   timestamp: string;
 }
 
-
 export interface TrafficResultsResponse {
   id: number;
   city: string;

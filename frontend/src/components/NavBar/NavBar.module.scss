@@ -1,0 +1,72 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 4em;
+  padding-left: 4em;
+  height: 5em;
+  background-color: green;
+  border-bottom: 1px solid black;
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 6em;
+  &_btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4em;
+    width: 25%;
+  }
+  &_title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    transition: 0.3s ease-in-out;
+    &:hover {
+      opacity: 0.6;
+      cursor: pointer;
+    }
+  }
+}
+
+.title {
+  font-size: 28px;
+  letter-spacing: 0.1em;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s ease-in-out;
+}
+
+.link {
+  font-size: 16px;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s ease-in-out;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  &:hover {
+    opacity: 0.6;
+    cursor: pointer;
+  }
+}
+
+.image {
+  height: 5em;
+}
+
+.active {
+  color: black;
+}
+
+.bold {
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}

@@ -26,12 +26,8 @@ flask_app = create_app()
 celery = make_celery(flask_app)
 
 celery.conf.beat_schedule = {
-    'populate-traffic-data-every-hour': {
-        'task': 'urbansense.data.tasks.populate_traffic_data_task',
-        'schedule': crontab(minute=0, hour='*'),
-    },
-    'run-spark-job-every-hour': {
-        'task': 'urbansense.data.tasks.run_spark_job_task',
+    'populate-and-run-spark-job-every-hour': {
+        'task': 'urbansense.data.tasks.populate_and_run_spark_job_task',
         'schedule': crontab(minute=0, hour='*'),
     }
 }

@@ -78,23 +78,27 @@ def get_latest_results():
                 'latest_timestamp')
         ).group_by(TrafficAnalysisResult.city).subquery()
 
-        latest_data = db.session.query(TrafficAnalysisResult).join(
+        results = db.session.query(TrafficAnalysisResult).join(
             subquery,
             (TrafficAnalysisResult.city == subquery.c.city) & (
                 TrafficAnalysisResult.timestamp == subquery.c.latest_timestamp)
         ).all()
 
-        result_data = [
-            {
-                "id": data.id,
-                "city": data.city,
-                "avg_current_speed": data.avg_current_speed,
-                "avg_free_flow_speed": data.avg_free_flow_speed,
-                "speed_ratio": data.speed_ratio,
-                "timestamp": data.timestamp
+        result_data = []
+        for result in results:
+            utc_timestamp = result.timestamp
+            timezone_aest = pytz.timezone('Australia/Sydney')
+            aest_timestamp = utc_timestamp.astimezone(timezone_aest)
+            formatted_timestamp = aest_timestamp.strftime('%d/%m %H:%M')
+
+            result_item = {
+                "city": result.city,
+                "avg_current_speed": result.avg_current_speed,
+                "avg_free_flow_speed": result.avg_free_flow_speed,
+                "speed_ratio": result.speed_ratio,
+                "timestamp": formatted_timestamp
             }
-            for data in latest_data
-        ]
+            result_data.append(result_item)
 
         return jsonify(result_data), 200
     except Exception as e:
@@ -139,8 +143,14 @@ def get_latest_city_traffic_data():
                 CityTrafficData.timestamp == subquery.c.latest_timestamp)
         ).all()
 
-        result_data = [
-            {
+        result_data = []
+        for data in latest_data:
+            utc_timestamp = data.timestamp
+            timezone_aest = pytz.timezone('Australia/Sydney')
+            aest_timestamp = utc_timestamp.astimezone(timezone_aest)
+            formatted_timestamp = aest_timestamp.strftime('%d/%m %H:%M')
+
+            result_item = {
                 "id": data.id,
                 "city": data.city,
                 "location": data.location,
@@ -148,10 +158,10 @@ def get_latest_city_traffic_data():
                 "current_travel_time": data.current_travel_time,
                 "free_flow_travel_time": data.free_flow_travel_time,
                 "free_flow_speed": data.free_flow_speed,
-                "current_speed": data.current_speed
+                "current_speed": data.current_speed,
+                "timestamp": formatted_timestamp
             }
-            for data in latest_data
-        ]
+            result_data.append(result_item)
 
         return jsonify(result_data), 200
     except Exception as e:

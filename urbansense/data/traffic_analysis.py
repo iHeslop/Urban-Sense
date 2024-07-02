@@ -56,14 +56,19 @@ def run_spark_job():
         for row in rows:
             timestamp = datetime.now().replace(
                 hour=row['hour'], minute=0, second=0, microsecond=0)
-            analysis_entry = TrafficAnalysisResult(
+            existing_entry = TrafficAnalysisResult.query.filter_by(
                 city=row['city'],
-                avg_current_speed=row['avg_current_speed'],
-                avg_free_flow_speed=row['avg_free_flow_speed'],
-                speed_ratio=row['speed_ratio'],
                 timestamp=timestamp
-            )
-            db.session.add(analysis_entry)
+            ).first()
+            if not existing_entry:
+                analysis_entry = TrafficAnalysisResult(
+                    city=row['city'],
+                    avg_current_speed=row['avg_current_speed'],
+                    avg_free_flow_speed=row['avg_free_flow_speed'],
+                    speed_ratio=row['speed_ratio'],
+                    timestamp=timestamp
+                )
+                db.session.add(analysis_entry)
             db.session.commit()
 
         spark.stop()
