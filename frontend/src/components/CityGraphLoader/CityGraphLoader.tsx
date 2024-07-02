@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import { getResultsByCity } from "../../services/traffic-data";
 import { TrafficResultsResponse } from "../../services/api-responses.interface";
+import Loader from "../Loader/Loader";
 
 interface CityGraphLoaderProps {
   city: string;
@@ -38,9 +39,12 @@ const CityGraphLoader = ({ city }: CityGraphLoaderProps) => {
 
   return (
     <>
-      {fetchStatus === "LOADING" && <h2>...LOADING...</h2>}
-      {fetchStatus === "FAILED" && <h2>...FAILED TO LOAD...</h2>}
-      {fetchStatus === "SUCCESS" && (
+      {fetchStatus === "LOADING" && <Loader fetchStatus={fetchStatus} />}
+      {fetchStatus === "FAILED" && <Loader fetchStatus={fetchStatus} />}
+      {fetchStatus === "SUCCESS" && data.length === 0 && (
+        <Loader fetchStatus={fetchStatus} />
+      )}
+      {fetchStatus === "SUCCESS" && data.length > 0 && (
         <div>
           <LineChart width={1000} height={600} data={data}>
             <CartesianGrid strokeDasharray="3 3" />

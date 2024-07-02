@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import { getLatestResults } from "../../services/traffic-data";
 import { TrafficResultsResponse } from "../../services/api-responses.interface";
+import Loader from "../Loader/Loader";
 
 interface ComparisonGraphLoaderProps {
   comparison: string;
@@ -43,8 +44,8 @@ const ComparisonGraphLoader = ({ comparison }: ComparisonGraphLoaderProps) => {
   };
   return (
     <>
-      {fetchStatus === "LOADING" && <h2>...LOADING...</h2>}
-      {fetchStatus === "FAILED" && <h2>...FAILED TO LOAD...</h2>}
+      {fetchStatus === "LOADING" && <Loader fetchStatus={fetchStatus} />}
+      {fetchStatus === "FAILED" && <Loader fetchStatus={fetchStatus} />}
       {fetchStatus === "SUCCESS" && (
         <div>
           <BarChart width={1000} height={600} data={data}>

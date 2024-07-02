@@ -12,14 +12,6 @@
   gap: 2em;
 }
 
-.bg {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  opacity: 0.3;
-  z-index: -1;
-}
-
 .copyright {
   position: absolute;
   bottom: 0;
@@ -27,4 +19,10 @@
   padding-right: 1vw;
   font-size: 14px;
   letter-spacing: 0.2em;
+}
+
+.graph {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
