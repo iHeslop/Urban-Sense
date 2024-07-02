@@ -5,8 +5,8 @@
 
 .box {
   display: flex;
+  flex-direction: column;
   padding: 4%;
-  width: 100%;
   gap: 2em;
 }
 

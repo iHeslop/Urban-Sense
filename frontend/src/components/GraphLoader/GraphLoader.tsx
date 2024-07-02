@@ -1,23 +1,20 @@
 import { useEffect, useState } from "react"
 import { BarChart, Bar, YAxis, XAxis, Tooltip, CartesianGrid, Legend } from "recharts"
-import { getAllResults, getLatestResults, getResultsByCity } from "../../services/traffic-data"
+import {  getLatestResults } from "../../services/traffic-data"
 import { TrafficResultsResponse } from "../../services/api-responses.interface"
 
-interface ResultsGraphLoaderProps {
-    dataType: 'allResults' | "latestResults" | "Sydney"
-}
 
-const ResultsGraphLoader = ({ dataType }: ResultsGraphLoaderProps) => {
+
+const ResultsGraphLoader = () => {
     const [data, setData] = useState<TrafficResultsResponse[]>([]);
      const [fetchStatus, setFetchStatus] = useState("");
 
     useEffect(() => {
        setFetchStatus("LOADING")
        fetchData()
-    }, [dataType])
+    }, [])
 
     const fetchData = async () => {
-        if(dataType === "latestResults") {
             getLatestResults()
                 .then((data) => {
                     setFetchStatus("SUCCESS")
@@ -27,21 +24,7 @@ const ResultsGraphLoader = ({ dataType }: ResultsGraphLoaderProps) => {
                     setFetchStatus("FAILED")
                     console.warn(e)
                 })
-        } else if (dataType === "Sydney") {
-            getResultsByCity(dataType)
-                .then((data) => {
-                    setFetchStatus("SUCCESS")
-                    setData(data)
-                })
-                .catch((e) => {
-                    setFetchStatus("FAILED")
-                    console.warn(e)
-                })
-        } else {
-            console.error("Fetch Failed")
         }
-    }
-
     return (
         <>
             {fetchStatus === "LOADING" && <h2>...LOADING...</h2>}
@@ -49,11 +32,12 @@ const ResultsGraphLoader = ({ dataType }: ResultsGraphLoaderProps) => {
             {fetchStatus === "SUCCESS" &&
                 <BarChart width={1000} height={600} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="timestamp" />
+                    <XAxis dataKey="city" />
                     <YAxis />
                     <Tooltip />
                     <Legend iconType="square"/>
-                    <Bar dataKey="speed_ratio" fill="#82ca9d" />
+                    <Bar dataKey="avg_current_speed" fill="#82ca9d" name="Average Current Speed"/>
+                    <Bar dataKey="avg_free_flow_speed" fill="#8884d8" name="Average Free Flow Speed"/>
                 </BarChart>
             }
         </>
