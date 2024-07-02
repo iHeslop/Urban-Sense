@@ -1,28 +1,92 @@
 .container {
   display: flex;
-  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 5%;
+  gap: 2em;
+  color: white;
 }
 
 .box {
   display: flex;
   flex-direction: column;
-  padding: 4%;
-  gap: 2em;
+  align-items: center;
+  width: 60%;
 }
 
-.bg {
-  position: absolute;
-  bottom: 0;
+.list {
+  display: flex;
+  align-items: center;
+  width: 60%;
+  gap: 4em;
+}
+
+.title {
+  font-size: 32px;
+  letter-spacing: 0.1em;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+
+.bold {
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+.desc {
+  line-height: 1.5em;
+  animation: fadeIn 1s forwards;
+  animation-delay: 3s;
+  opacity: 0;
+}
+
+.info {
+  font-size: 14px;
+  line-height: 1.5em;
+}
+
+.video {
   width: 100%;
-  opacity: 0.3;
+  position: fixed;
   z-index: -1;
+  filter: brightness(50%) blur(5px);
+}
+
+.section {
+  animation: fadeIn 1s forwards;
+  animation-delay: 4s;
+  opacity: 0;
+  &_title {
+    transition: 0.3s ease-in-out;
+    &:hover {
+      cursor: pointer;
+      opacity: 0.6;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .copyright {
   position: absolute;
   bottom: 0;
-  right: 0;
-  padding-right: 1vw;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 14px;
   letter-spacing: 0.2em;
+  color: white;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
 }

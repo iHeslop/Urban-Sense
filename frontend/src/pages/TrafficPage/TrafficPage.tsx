@@ -10,12 +10,16 @@ const TrafficPage = () => {
   const [dataType, setDataType] = useState<string>("cityComparison");
   const [city, setCity] = useState<string>("Sydney");
   const [comparison, setComparison] = useState<string>("trafficLevels");
+  const [cityData, setCityData] = useState<string>("trafficLevels");
 
   const handleDataTypeChange = (value: string) => {
     setDataType(value);
   };
   const handleCityChange = (city: string) => {
     setCity(city);
+  };
+  const handleCityDataChange = (data: string) => {
+    setCityData(data);
   };
   const handleComparisonChange = (value: string) => {
     setComparison(value);
@@ -54,6 +58,13 @@ const TrafficPage = () => {
         {dataType === "individualCity" && (
           <>
             <div className={styles.select}>
+              <p className={styles.label}>Select Display Data:</p>
+              <ComparisonSelect
+                handleComparisonChange={handleCityDataChange}
+                comparison={cityData}
+              />
+            </div>
+            <div className={styles.select}>
               <p className={styles.label}>Select City:</p>
               <CitySelect handleCityChange={handleCityChange} city={city} />
             </div>
@@ -80,7 +91,7 @@ const TrafficPage = () => {
       )}
       {dataType === "individualCity" && (
         <div className={styles.graph}>
-          <CityGraphLoader city={city} />
+          <CityGraphLoader city={city} cityData={cityData} />
         </div>
       )}
       <p className={styles.copyright}>&copy; / 2024</p>

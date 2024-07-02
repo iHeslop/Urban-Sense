@@ -15,9 +15,10 @@ import styles from "./CityGraphLoader.module.scss";
 
 interface CityGraphLoaderProps {
   city: string;
+  cityData: string;
 }
 
-const CityGraphLoader = ({ city }: CityGraphLoaderProps) => {
+const CityGraphLoader = ({ city, cityData }: CityGraphLoaderProps) => {
   const [data, setData] = useState<TrafficResultsResponse[]>([]);
   const [fetchStatus, setFetchStatus] = useState("");
 
@@ -50,28 +51,48 @@ const CityGraphLoader = ({ city }: CityGraphLoaderProps) => {
           <LineChart width={1000} height={600} data={data}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="timestamp" />
-            <YAxis
-              ticks={[0, 10, 20, 30, 40, 50]}
-              label={{ value: "Kilometres / Hour", angle: -90, dx: -20 }}
-            />
+
             <Tooltip />
             <Legend iconType="square" />
-            <Line
-              type="monotone"
-              dataKey="avg_free_flow_speed"
-              stroke="rebeccapurple"
-              name="Average Free Flow Speed"
-              dot={{ strokeWidth: 2 }}
-              strokeWidth={2}
-            />
-            <Line
-              type="monotone"
-              dataKey="avg_current_speed"
-              stroke="green"
-              name="Average Current Speed"
-              dot={{ strokeWidth: 2 }}
-              strokeWidth={2}
-            />
+            {cityData === "speedLevels" && (
+              <>
+                <YAxis
+                  ticks={[0, 10, 20, 30, 40, 50]}
+                  label={{ value: "Kilometres / Hour", angle: -90, dx: -20 }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="avg_free_flow_speed"
+                  stroke="rebeccapurple"
+                  name="Average Free Flow Speed"
+                  dot={{ strokeWidth: 2 }}
+                  strokeWidth={2}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="avg_current_speed"
+                  stroke="green"
+                  name="Average Current Speed"
+                  dot={{ strokeWidth: 2 }}
+                  strokeWidth={2}
+                />
+              </>
+            )}
+            {cityData === "trafficLevels" && (
+              <>
+                <YAxis
+                  label={{ value: "Traffic Flow % ", angle: -90, dx: -20 }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="speed_ratio"
+                  name="Traffic Flow Level"
+                  stroke="green"
+                  dot={{ strokeWidth: 2 }}
+                  strokeWidth={2}
+                />
+              </>
+            )}
           </LineChart>
           <p className={styles.title}>{city}</p>
         </div>
