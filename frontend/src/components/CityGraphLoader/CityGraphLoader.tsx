@@ -49,7 +49,7 @@ const CityGraphLoader = ({ city, cityData }: CityGraphLoaderProps) => {
       {fetchStatus === "SUCCESS" && data.length > 0 && (
         <div className={styles.container}>
           <LineChart
-            width={1000}
+            width={1200}
             height={600}
             data={data}
             className={styles.chart}
