@@ -1,0 +1,53 @@
+.video {
+  width: 100%;
+  position: fixed;
+  z-index: -1;
+  filter: brightness(50%) blur(5px);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 5%;
+  gap: 2em;
+  color: white;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+}
+
+.title {
+  font-size: 32px;
+  letter-spacing: 0.1em;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+
+.bold {
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+.info {
+  opacity: 0;
+  font-size: 20px;
+  line-height: 1.5em;
+  animation: fadeIn 1s forwards;
+  animation-delay: 1s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
