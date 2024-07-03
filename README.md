@@ -6,13 +6,13 @@
 
   ![alt text](<screenshots/Screenshot 2024-07-02 221425.png>)
 
-- Traffic Data Page showing City Comparison Data:
-
-  ![alt text](<screenshots/Screenshot 2024-07-02 221519.png>)
-
-- Example of specific City Data display:
+- Traffic Data Page showing Realtime City Data:
 
   ![alt text](<screenshots/Screenshot 2024-07-02 221602.png>)
+
+- Example of Air Quality Display:
+
+  ![alt text](<screenshots/Screenshot 2024-07-03 132025.png>)
 
 ---
 
@@ -21,7 +21,7 @@
 Smart City Data Analytics platform is a comprehensive project that involves integrating various data sources, processing and analyzing the data, and presenting it in a user-friendly interface. The main focus areas of the project are to analyze and look at cities in relation to:
 
 - Traffic Monitoring
-- Air quality and pollution levels (in progress)
+- Air quality and pollution levels
 - Energy Consumption (in progress)
 - Water Quality and Usage (in progress)
 
@@ -79,3 +79,8 @@ Smart City Data Analytics platform is a comprehensive project that involves inte
 - General Python/Flask programming. New framework so had to start from scratch. Docs very helpful.
 
 ---
+
+## Resources
+
+- TomTom Traffic API: https://developer.tomtom.com/traffic-api/documentation/product-information/introduction
+- IQAir AirVisual API: https://api-docs.iqair.com/
