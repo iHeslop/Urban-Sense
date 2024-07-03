@@ -4,7 +4,7 @@
 
 - A view of the landing page:
 
-  ![alt text](<screenshots/Screenshot 2024-07-02 221425.png>)
+  ![alt text](<screenshots/Screenshot 2024-07-02 221422.png>)
 
 - Traffic Data Page showing Realtime City Data:
 
