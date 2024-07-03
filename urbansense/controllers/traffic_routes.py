@@ -7,11 +7,6 @@ from urbansense.models.traffic_data_model import TrafficAnalysisResult
 
 traffic_routes_bp = Blueprint('traffic_routes', __name__)
 
-
-@traffic_routes_bp.route("/")
-def home():
-    return "Urban Sense Analytics Platform"
-
 # Data Analysis / Script Routes
 
 
