@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  padding-left: 4%;
+  gap: 1em;
+  margin-top: 3%;
+}
+
+.copyright {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-right: 1vw;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+}
+
+.graph {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 5%;
+}
+
+.title {
+  font-size: 24px;
+  letter-spacing: 0.1em;
+}
+
+.bold {
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+.select {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.info {
+  font-size: 13px;
+  color: gray;
+  &_list {
+    line-height: 0.5em;
+  }
+}
+
+.text {
+  line-height: 1.5em;
+}

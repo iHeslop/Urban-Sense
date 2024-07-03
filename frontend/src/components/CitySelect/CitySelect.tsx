@@ -17,7 +17,6 @@ const CitySelect = ({ handleCityChange, city }: CitySelectProps) => {
         <option value="Melbourne">Melbourne</option>
         <option value="Adelaide">Adelaide</option>
         <option value="Brisbane">Brisbane</option>
-        <option value="Canberra">Canberra</option>
         <option value="Perth">Perth</option>
       </select>
     </>

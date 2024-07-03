@@ -18,7 +18,8 @@ export const getResultsByCity = async (
   }
   const data = await response.json();
   data.sort((a: TrafficResultsResponse, b: TrafficResultsResponse) => {
-    return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime();
+    return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
   });
-  return data.slice(0, 8);
+  let slicedData = data.slice(0, 8);
+  return slicedData.reverse();
 };

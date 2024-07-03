@@ -3,9 +3,9 @@ from flask import Blueprint, jsonify
 from urbansense.services.traffic_data import populate_traffic_data
 from urbansense.data.traffic_analysis import run_spark_job
 from urbansense.db_config import db
-from urbansense.models.traffic_data_model import CityTrafficData, TrafficAnalysisResult
+from urbansense.models.traffic_data_model import TrafficAnalysisResult
 
-traffic_routes_bp = Blueprint('routes', __name__)
+traffic_routes_bp = Blueprint('traffic_routes', __name__)
 
 
 @traffic_routes_bp.route("/")
@@ -95,69 +95,6 @@ def get_latest_results():
                 "avg_current_speed": result.avg_current_speed,
                 "avg_free_flow_speed": result.avg_free_flow_speed,
                 "speed_ratio": result.speed_ratio,
-                "timestamp": formatted_timestamp
-            }
-            result_data.append(result_item)
-
-        return jsonify(result_data), 200
-    except Exception as e:
-        return jsonify({"message": str(e)}), 500
-
-
-@traffic_routes_bp.route('/city-traffic-data', methods=['GET'])
-def get_all_city_traffic_data():
-    try:
-        results = CityTrafficData.query.all()
-
-        result_data = [
-            {
-                "id": result.id,
-                "city": result.city,
-                "location": result.location,
-                "timestamp": result.timestamp,
-                "current_travel_time": result.current_travel_time,
-                "free_flow_travel_time": result.free_flow_travel_time,
-                "free_flow_speed": result.free_flow_speed,
-                "current_speed": result.current_speed
-            }
-            for result in results
-        ]
-
-        return jsonify(result_data), 200
-    except Exception as e:
-        return jsonify({"message": str(e)}), 500
-
-
-@traffic_routes_bp.route('/latest-city-traffic-data', methods=['GET'])
-def get_latest_city_traffic_data():
-    try:
-        subquery = db.session.query(
-            CityTrafficData.city,
-            db.func.max(CityTrafficData.timestamp).label('latest_timestamp')
-        ).group_by(CityTrafficData.city).subquery()
-
-        latest_data = db.session.query(CityTrafficData).join(
-            subquery,
-            (CityTrafficData.city == subquery.c.city) & (
-                CityTrafficData.timestamp == subquery.c.latest_timestamp)
-        ).all()
-
-        result_data = []
-        for data in latest_data:
-            utc_timestamp = data.timestamp
-            timezone_aest = pytz.timezone('Australia/Sydney')
-            aest_timestamp = utc_timestamp.astimezone(timezone_aest)
-            formatted_timestamp = aest_timestamp.strftime('%d/%m %H:%M')
-
-            result_item = {
-                "id": data.id,
-                "city": data.city,
-                "location": data.location,
-                "timestamp": data.timestamp,
-                "current_travel_time": data.current_travel_time,
-                "free_flow_travel_time": data.free_flow_travel_time,
-                "free_flow_speed": data.free_flow_speed,
-                "current_speed": data.current_speed,
                 "timestamp": formatted_timestamp
             }
             result_data.append(result_item)

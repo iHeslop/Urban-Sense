@@ -36,7 +36,6 @@ def run_spark_job():
             .option("driver", "com.mysql.cj.jdbc.Driver") \
             .load()
 
-        # Filter data for the current date and round timestamp to the nearest hour
         df_filtered = df.filter(df.timestamp >= current_date())
         df_filtered = df_filtered.withColumn('hour', hour(col('timestamp')))
 

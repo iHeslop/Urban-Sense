@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from urbansense.controllers.traffic_routes import traffic_routes_bp
+from urbansense.controllers.air_routes import air_routes_bp
 from urbansense.db_config import Config, db
 
 
@@ -14,6 +15,7 @@ def create_app():
     )
     db.init_app(app)
     app.register_blueprint(traffic_routes_bp)
+    app.register_blueprint(air_routes_bp)
     with app.app_context():
         db.create_all()
     return app
