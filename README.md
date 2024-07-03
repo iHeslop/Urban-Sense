@@ -63,7 +63,7 @@ UrbanSense is a smart city data analytics platform that involves integrating var
 
 ## Future Goals
 
-- Add other sections: air pollution, water quality and energy consumption
+- Add other sections: water usage and energy consumption
 - Integrate authentication for user
 - Mobile Responsive Design
 - Deployment. Potentially AWS or Azure
