@@ -20,5 +20,5 @@ export const getResultsByCity = async (
   data.sort((a: TrafficResultsResponse, b: TrafficResultsResponse) => {
     return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime();
   });
-  return data;
+  return data.slice(0, 8);
 };

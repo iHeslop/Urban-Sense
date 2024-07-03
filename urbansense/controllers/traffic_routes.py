@@ -5,17 +5,17 @@ from urbansense.data.traffic_analysis import run_spark_job
 from urbansense.db_config import db
 from urbansense.models.traffic_data_model import CityTrafficData, TrafficAnalysisResult
 
-routes_bp = Blueprint('routes', __name__)
+traffic_routes_bp = Blueprint('routes', __name__)
 
 
-@routes_bp.route("/")
+@traffic_routes_bp.route("/")
 def home():
     return "Urban Sense Analytics Platform"
 
 # Data Analysis / Script Routes
 
 
-@routes_bp.route("/populate-traffic-data")
+@traffic_routes_bp.route("/populate-traffic-data")
 def populate_traffic_data_route():
     try:
         populate_traffic_data()
@@ -24,7 +24,7 @@ def populate_traffic_data_route():
         return jsonify({"message": str(e)}), 500
 
 
-@routes_bp.route('/run-spark-job', methods=['GET'])
+@traffic_routes_bp.route('/run-spark-job', methods=['GET'])
 def trigger_spark_job():
     try:
         run_spark_job()
@@ -35,7 +35,7 @@ def trigger_spark_job():
 # Database Routes
 
 
-@routes_bp.route('/results/<city>', methods=['GET'])
+@traffic_routes_bp.route('/results/<city>', methods=['GET'])
 def get_result_by_city(city):
     try:
         results = TrafficAnalysisResult.query.with_entities(
@@ -68,7 +68,7 @@ def get_result_by_city(city):
         return jsonify({"message": str(e)}), 500
 
 
-@routes_bp.route('/latest-results', methods=['GET'])
+@traffic_routes_bp.route('/latest-results', methods=['GET'])
 def get_latest_results():
     try:
         subquery = db.session.query(
@@ -104,7 +104,7 @@ def get_latest_results():
         return jsonify({"message": str(e)}), 500
 
 
-@routes_bp.route('/city-traffic-data', methods=['GET'])
+@traffic_routes_bp.route('/city-traffic-data', methods=['GET'])
 def get_all_city_traffic_data():
     try:
         results = CityTrafficData.query.all()
@@ -128,7 +128,7 @@ def get_all_city_traffic_data():
         return jsonify({"message": str(e)}), 500
 
 
-@routes_bp.route('/latest-city-traffic-data', methods=['GET'])
+@traffic_routes_bp.route('/latest-city-traffic-data', methods=['GET'])
 def get_latest_city_traffic_data():
     try:
         subquery = db.session.query(

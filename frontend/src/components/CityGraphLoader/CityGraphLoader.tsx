@@ -48,17 +48,23 @@ const CityGraphLoader = ({ city, cityData }: CityGraphLoaderProps) => {
       )}
       {fetchStatus === "SUCCESS" && data.length > 0 && (
         <div className={styles.container}>
-          <LineChart width={1000} height={600} data={data}>
+          <LineChart
+            width={1000}
+            height={600}
+            data={data}
+            className={styles.chart}
+          >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="timestamp" />
+            <XAxis dataKey="timestamp" tickMargin={10} fontSize={13} />
 
             <Tooltip />
-            <Legend iconType="square" />
+            <Legend iconType="circle" wrapperStyle={{ position: "relative" }} />
             {cityData === "speedLevels" && (
               <>
                 <YAxis
                   ticks={[0, 10, 20, 30, 40, 50]}
                   label={{ value: "Kilometres / Hour", angle: -90, dx: -20 }}
+                  fontSize={13}
                 />
                 <Line
                   type="monotone"
@@ -82,6 +88,7 @@ const CityGraphLoader = ({ city, cityData }: CityGraphLoaderProps) => {
               <>
                 <YAxis
                   label={{ value: "Traffic Flow % ", angle: -90, dx: -20 }}
+                  fontSize={13}
                 />
                 <Line
                   type="monotone"

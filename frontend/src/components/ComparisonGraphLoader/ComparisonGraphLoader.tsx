@@ -51,14 +51,15 @@ const ComparisonGraphLoader = ({ comparison }: ComparisonGraphLoaderProps) => {
         <div className={styles.container}>
           <BarChart width={1200} height={600} data={data}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="city" />
+            <XAxis dataKey="city" tickMargin={10} fontSize={13} />
             <Tooltip />
-            <Legend iconType="square" />
+            <Legend iconType="square" wrapperStyle={{ position: "relative" }} />
             {comparison === "speedLevels" && (
               <>
                 <YAxis
                   ticks={[0, 10, 20, 30, 40, 50]}
                   label={{ value: "Kilometres / Hour", angle: -90, dx: -20 }}
+                  fontSize={13}
                 />
                 <Bar
                   dataKey="avg_current_speed"
@@ -78,6 +79,7 @@ const ComparisonGraphLoader = ({ comparison }: ComparisonGraphLoaderProps) => {
               <>
                 <YAxis
                   label={{ value: "Traffic Flow % ", angle: -90, dx: -20 }}
+                  fontSize={13}
                 />
                 <Bar
                   dataKey="speed_ratio"
