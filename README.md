@@ -18,7 +18,7 @@
 
 ## Description / Requirements
 
-Smart City Data Analytics platform is a comprehensive project that involves integrating various data sources, processing and analyzing the data, and presenting it in a user-friendly interface. The main focus areas of the project are to analyze and look at cities in relation to:
+UrbanSense is a smart city data analytics platform that involves integrating various data sources, processing and analyzing the data, and presenting it in a user-friendly interface. The main focus areas of the project are to analyze and look at cities in relation to:
 
 - Traffic Monitoring
 - Air quality and pollution levels
