@@ -37,7 +37,7 @@
 .desc {
   line-height: 1.5em;
   animation: fadeIn 1s forwards;
-  animation-delay: 3s;
+  animation-delay: 2s;
   opacity: 0;
 }
 
@@ -55,7 +55,7 @@
 
 .section {
   animation: fadeIn 1s forwards;
-  animation-delay: 4s;
+  animation-delay: 3s;
   opacity: 0;
   width: 25%;
   &_title {

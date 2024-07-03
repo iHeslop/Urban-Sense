@@ -1,6 +1,6 @@
 import HomePage from "./pages/HomePage/HomePage";
 import TrafficPage from "./pages/TrafficPage/TrafficPage";
-import PollutionPage from "./pages/PollutionPage/PollutionPage";
+import AirPage from "./pages/AirPage/AirPage";
 import WaterPage from "./pages/WaterPage/WaterPage";
 import EnergyPage from "./pages/EnergyPage/EnergyPage";
 import NavBar from "./components/NavBar/NavBar";
@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/traffic" element={<TrafficPage />} />
-          <Route path="/pollution" element={<PollutionPage />} />
+          <Route path="/pollution" element={<AirPage />} />
           <Route path="/water" element={<WaterPage />} />
           <Route path="/energy" element={<EnergyPage />} />
         </Routes>

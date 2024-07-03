@@ -1,7 +1,7 @@
 const PollutionPage = () => {
   return (
     <>
-      <p>Pollution Page</p>
+      <p>Air Page</p>
     </>
   );
 };
