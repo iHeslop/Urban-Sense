@@ -39,7 +39,7 @@ def insert_traffic_data(data, city):
         free_flow_speed=data['flowSegmentData']['freeFlowSpeed'],
         current_speed=data['flowSegmentData']['currentSpeed']
     )
-    print("Inserted")
+    print(f"Traffic data for {city} successfully inserted")
     db.session.add(traffic_data)
     db.session.commit()
 
@@ -50,7 +50,6 @@ def populate_traffic_data():
         if point:
             traffic_data = fetch_traffic_data(API_URL, API_KEY, point)
             insert_traffic_data(traffic_data, city)
-            print(f"Traffic data for {city} inserted successfully!")
         else:
             print(f"City {city} not found.")
 
