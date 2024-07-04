@@ -80,6 +80,7 @@ const ComparisonGraphLoader = ({ comparison }: ComparisonGraphLoaderProps) => {
                 <YAxis
                   label={{ value: "Traffic Flow % ", angle: -90, dx: -20 }}
                   fontSize={13}
+                  ticks={[0, 20, 40, 60, 80, 100]}
                 />
                 <Bar
                   dataKey="speed_ratio"

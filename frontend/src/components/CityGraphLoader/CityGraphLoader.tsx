@@ -31,7 +31,11 @@ const CityGraphLoader = ({ city, cityData }: CityGraphLoaderProps) => {
     getResultsByCity(city)
       .then((data) => {
         setFetchStatus("SUCCESS");
-        setData(data);
+        const formattedData = data.map((item) => ({
+          ...item,
+          speed_ratio: item.speed_ratio * 100,
+        }));
+        setData(formattedData);
       })
       .catch((e) => {
         setFetchStatus("FAILED");
@@ -89,6 +93,7 @@ const CityGraphLoader = ({ city, cityData }: CityGraphLoaderProps) => {
                 <YAxis
                   label={{ value: "Traffic Flow % ", angle: -90, dx: -20 }}
                   fontSize={13}
+                  ticks={[0, 20, 40, 60, 80, 100]}
                 />
                 <Line
                   type="monotone"
